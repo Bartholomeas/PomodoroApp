@@ -14,14 +14,67 @@
 </head>
 
 <body>
-    <button class="settings-btn">
+    <button class="btn-settings">
         <i class="fas fa-cogs"></i>
     </button>
+
+    <div class="settings ">
+        <ul>
+            <li>
+                <p class="settings-setting-time">Worktime</p>
+                <input type="text" class="settings-value" value="25"></input>
+            </li>
+            <li>
+                <p class="settings-setting-time">Breaktime</p>
+                <input type="text" class="settings-value" value="5"></input>
+            </li>
+            <li>
+                <p class="settings-setting">Click type</p>
+                <label for="first">
+                    <input checked value="1" name="radio-btn" type="radio" id="first"
+                        class="settings-radio settings-value"></input>
+                    #1
+                </label>
+                <label for="second">
+                    <input value="2" name="radio-btn" type="radio" id="second"
+                        class="settings-radio settings-value"></input>
+                    #2
+                </label>
+                <label for="third">
+                    <input value="3" name="radio-btn" type="radio" id="third"
+                        class="settings-radio settings-value"></input>
+                    #3
+                </label>
+            </li>
+            <li>
+                <p class="settings-setting">Volume</p>
+                <input type="range" class="settings-value"></input>
+            </li>
+
+            <button class="btn btn-save">save</button>
+        </ul>
+    </div>
+
 
     <div class="clock">
         <div class="clock-circle"></div>
         <div class="clock-line">
-            <h3 class="clock-time">12:00</h3>
+            <div class="clock-timebox">
+                <p class="clock-time">12:00</p>
+                <p class="clock-activision">work</p>
+            </div>
+        </div>
+    </div>
+    <div class="clock-buttons">
+        <button class="btn btn-start">▶</button>
+        <button class="btn btn-pause">‖</button>
+    </div>
+
+    <div class="todo">
+        <div class="todo-body">
+            <p class="todo-header">todo</p>
+            <ul class="todo-items"></ul>
+            <div class="btn btn-add"></div>
         </div>
     </div>
 
