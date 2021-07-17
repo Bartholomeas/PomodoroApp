@@ -1,13 +1,73 @@
+$base-color: #C25050;
+$base-shade-color: #973232;
+$font-color: #F0E7D9;
+$secondary-color: #181F33;
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-body {
-    height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    color: #fff;
-    background-color: #0C0C17;
+html {
+    font-size: 62.5%;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: $font-color;
+    font-size: 1.6rem;
+    background-color: #0C0C17;
+    overflow: hidden;
+}
+
+.clock {
+    &-circle {
+
+        position: relative;
+        height: 30rem;
+        width: 30rem;
+        border: 5px solid $base-color;
+        border-radius: 50%;
+        overflow: hidden;
+        
+        &::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        // left: -50%;
+        bottom: -100%;
+        background: linear-gradient(90deg, rgba(122,47,47,1) 0%, rgba(151,50,50,1) 62%, rgb(158, 43, 43) 100%);
+        border-radius: 45%;
+        animation: fill 1s ease-in-out forwards;
+    }
+}
+
+    &-line {
+        position: absolute;
+        background-color: $base-color;
+        height: 5px;
+        // width: 15vw;
+        width: 50%;
+        top: 50%;
+        left: 50%;
+        border-radius: 50px;
+    }
+    &-time {
+        transform: translateY(-100%) translateX(4rem);
+        font-size: 3rem;
+    }
+}
+
+@keyframes fill{
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-99%) rotate(550deg);
+    }
+}
