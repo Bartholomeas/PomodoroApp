@@ -18,15 +18,15 @@
         <i class="fas fa-cogs"></i>
     </button>
 
-    <div class="settings ">
+    <div class="settings">
         <ul>
             <li>
                 <p class="settings-setting-time">Worktime</p>
-                <input type="text" class="settings-value" value="25"></input>
+                <input type="text" class="settings-value work-setting" value="1"></input>
             </li>
             <li>
                 <p class="settings-setting-time">Breaktime</p>
-                <input type="text" class="settings-value" value="5"></input>
+                <input type="text" class="settings-value break-setting" value="5"></input>
             </li>
             <li>
                 <p class="settings-setting">Click type</p>
@@ -66,15 +66,51 @@
         </div>
     </div>
     <div class="clock-buttons">
-        <button class="btn btn-start">▶</button>
-        <button class="btn btn-pause">‖</button>
+        <button class="btn btn-start"><i class="fas fa-play"></i></button>
+        <button class="btn btn-pause"><i class="fas fa-pause"></i></button>
     </div>
 
-    <div class="todo">
-        <div class="todo-body">
-            <p class="todo-header">todo</p>
-            <ul class="todo-items"></ul>
-            <div class="btn btn-add"></div>
+    <div class="todo ">
+        <button class="btn-todo">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+
+        <ul class="todo-items">
+
+            <li class="todo-item">
+                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
+                <button class="btn btn-delete">⨯</button>
+            </li>
+            <li class="todo-item">
+                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
+                <button class="btn btn-delete">⨯</button>
+            </li>
+            <li class="todo-item">
+                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
+                <button class="btn btn-delete">⨯</button>
+            </li>
+            <li class="todo-item">
+                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
+                <button class="btn btn-delete">⨯</button>
+            </li>
+            <li class="todo-item">
+                <p class="todo-item-content">Lorem ipsum dolor sit amet </p>
+                <button class="btn btn-delete">⨯</button>
+            </li>
+            <li class="todo-item">
+                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
+                <button class="btn btn-delete">⨯</button>
+            </li>
+            <li class="todo-item">
+                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
+                <button class="btn btn-delete">⨯</button>
+            </li>
+
+
+        </ul>
+        <div class="todo-headerbox">
+            <p class="todo-header">todo list</p>
+            <button class="btn btn-add">+</button>
         </div>
     </div>
 
