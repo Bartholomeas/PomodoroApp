@@ -1,15 +1,18 @@
-const settingsBtn = document.querySelector('.btn-settings');
-const settingsPanel = document.querySelector('.settings');
-const saveBtn = document.querySelector('.btn-save');
+const clockWatch = document.querySelector('.clock-time');
 
+// TODOLIST
 const todoBtn = document.querySelector('.btn-todo');
 const todo = document.querySelector('.todo');
 
-const clockWatch = document.querySelector('.clock-time');
 
+// SETTINGS
+const settingsBtn = document.querySelector('.btn-settings');
+const settingsPanel = document.querySelector('.settings');
+const saveBtn = document.querySelector('.btn-save');
 const workSetting = document.querySelector('.work-setting');
 const breakSetting = document.querySelector('.break-setting');
 
+// PLAY/PAUSE
 const playBtn = document.querySelector('.btn-start');
 const pauseBtn = document.querySelector('.btn-pause');
 
@@ -27,31 +30,43 @@ const handleTodo = () => {
 
 // Clock time
 let time = workSetting.value * 60;
-
 let counter = true;
 
 const updateTime = () => {
-    // counter = true;
     if(counter) {
-        const minutes = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60);
-        clockWatch.textContent = `${minutes}:${seconds}`;
+        playBtn.setAttribute('disabled', true);
+        const min = Math.floor(time / 60);
+        const minutes = min < 10 ? `0${min}` : `${min}`;
+        const sec = Math.floor(time % 60);
+        const seconds = sec < 10 ? `0${sec}` : `${sec}`;
+        
+        clockWatch.textContent =`${minutes}:${seconds}`
     } else {
         counter = !counter;
+            time = workSetting.value * 60;
+            playBtn.removeAttribute('disabled');
+        return
     }
-   
+    
     setTimeout(() => {
-        time--;
-        updateTime()
-        if(time == 0) {
+        if(time > 0) {
+            time--;
+            updateTime()
+        }else {
             clockWatch.textContent = '00:00';
             counter = !counter;
-            clearTimeout()
+            clearTimeout();
+            updateTime()
         }
-    }, 10)
-}
+    }, 1000)
+};
+
+const updateSettings = () => {
+    settingsPanel.classList.remove('active-modal')
+    
+};
 
 settingsBtn.addEventListener('click', handleSettings);
-saveBtn.addEventListener('click', () => settingsPanel.classList.remove('active-modal'));
-todoBtn.addEventListener('click', handleTodo)
-playBtn.addEventListener('click', updateTime)
+saveBtn.addEventListener('click',updateSettings);
+todoBtn.addEventListener('click', handleTodo);
+playBtn.addEventListener('click', updateTime);

@@ -122,10 +122,20 @@ body {
     transform-origin: top center;
     transition: transform .3s ease-in-out;
     z-index: 100;
-
-
+    
     &.active-modal {
         transform: scaleY(1);
+        
+        li {
+            .settings-setting {
+                
+                font-size: 1.8rem;
+
+                &::before {
+                    font-size: 1rem;
+                }
+            }
+        }
     }
 
     &::before {
@@ -167,6 +177,10 @@ body {
                 color:$base-color
             }
         }
+    }
+
+    &-setting {
+        font-size: 1.8rem;
     }
 
     &-setting-time {
