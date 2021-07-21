@@ -1,8 +1,9 @@
 const clockWatch = document.querySelector('.clock-time');
-const slime = document.querySelector('.clock-circle');
+const clockCircle = document.querySelector('.clock-circle');
+const clockSlime = document.querySelector('.clock-circle-slime');
 
-const lolo = getComputedStyle(document.querySelector('.clock-circle'), '::before').getPropertyValue('content');
-console.log(lolo)
+// AUDIO
+const ticking = document.querySelector('.ticking');
 
 // TODOLIST
 const todoBtn = document.querySelector('.btn-todo');
@@ -13,8 +14,10 @@ const todo = document.querySelector('.todo');
 const settingsBtn = document.querySelector('.btn-settings');
 const settingsPanel = document.querySelector('.settings');
 const saveBtn = document.querySelector('.btn-save');
+const volumeRange = document.querySelector('.settings-volume');
 const workSetting = document.querySelector('.work-setting');
 const breakSetting = document.querySelector('.break-setting');
+
 
 // PLAY/PAUSE
 const playBtn = document.querySelector('.btn-start');
@@ -38,7 +41,6 @@ let counter = true;
 
 
 const updateTime = () => {
-    console.log(time)
     if(counter) {
         const min = Math.floor(time / 60);
         const minutes = min < 10 ? `0${min}` : `${min}`;
@@ -46,6 +48,7 @@ const updateTime = () => {
         const seconds = sec < 10 ? `0${sec}` : `${sec}`;
         
         clockWatch.textContent =`${minutes}:${seconds}`
+
         if(time === 0) {
             console.log('object')
             clearInterval(counterInterval);
@@ -70,9 +73,29 @@ const updateTime = () => {
     // }, 100)
 };
 
+// CHANGING VOLUME
+const updateVolume = () => {
+    ticking.volume = parseInt(volumeRange.value)/100;
+console.log(parseInt(volumeRange.value)/100)
+
+};
+// HANDLING EFFECTS
+const handleEffects = () => {
+    clockCircle.classList.add('clock-circle-slime')
+    ticking.play();
+}
+
+
+// TIME COUNTER
 let counterInterval;
 const countTime = () => {
+    if(clockWatch.textContent == '00:00') {
+        return
+    }
+    handleEffects()
+
     playBtn.setAttribute('disabled', true);
+
     counterInterval = setInterval(() => {
         if(counter) {
             time--;
@@ -83,7 +106,7 @@ const countTime = () => {
             console.log('kraksa')
             updateTime()
         }
-    }, 10)
+    }, 1000)
 }
 
 const updateSettings = () => {
@@ -97,6 +120,12 @@ const updateSettings = () => {
 const pauseTime = () => {
     playBtn.removeAttribute('disabled');
     clearInterval(counterInterval)
+    ticking.pause();
+
+
+    if(clockWatch.textContent == '00:00') {
+        return
+    }
 
 }
 
@@ -104,4 +133,5 @@ settingsBtn.addEventListener('click', handleSettings);
 saveBtn.addEventListener('click',updateSettings);
 todoBtn.addEventListener('click', handleTodo);
 playBtn.addEventListener('click', countTime);
-pauseBtn.addEventListener('click',pauseTime);
+pauseBtn.addEventListener('click', pauseTime);
+volumeRange.addEventListener('change', updateVolume) 

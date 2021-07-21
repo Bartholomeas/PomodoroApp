@@ -14,6 +14,7 @@
 </head>
 
 <body>
+
     <button class="btn-settings">
         <i class="fas fa-cogs"></i>
     </button>
@@ -48,7 +49,10 @@
             </li>
             <li>
                 <label class="settings-setting">Volume</label>
-                <input type="range" class="settings-value"></input>
+                <input type="range" min="0" max="100" class="settings-value settings-volume"></input>
+                <audio class="ticking" loop controls>
+                    <source src="/audio/ticking.mp3" type="audio/mpeg">
+                </audio>
             </li>
 
         </ul>
@@ -60,7 +64,7 @@
         <div class="clock-circle"></div>
         <div class="clock-line">
             <div class="clock-timebox">
-                <p class="clock-time">25:00</p>
+                <p class="clock-time">10:00</p>
                 <p class="clock-activision">work</p>
             </div>
         </div>
@@ -105,7 +109,6 @@
                 <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
                 <button class="btn btn-delete">⨯</button>
             </li>
-
 
         </ul>
         <div class="todo-headerbox">
