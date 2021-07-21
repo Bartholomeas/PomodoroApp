@@ -1,4 +1,8 @@
 const clockWatch = document.querySelector('.clock-time');
+const slime = document.querySelector('.clock-circle');
+
+const lolo = getComputedStyle(document.querySelector('.clock-circle'), '::before').getPropertyValue('content');
+console.log(lolo)
 
 // TODOLIST
 const todoBtn = document.querySelector('.btn-todo');
@@ -11,7 +15,6 @@ const settingsPanel = document.querySelector('.settings');
 const saveBtn = document.querySelector('.btn-save');
 const workSetting = document.querySelector('.work-setting');
 const breakSetting = document.querySelector('.break-setting');
-// const allSettings = document.querySelectorAll('.settings-setting');
 
 // PLAY/PAUSE
 const playBtn = document.querySelector('.btn-start');
@@ -35,6 +38,7 @@ let counter = true;
 
 
 const updateTime = () => {
+    console.log(time)
     if(counter) {
         const min = Math.floor(time / 60);
         const minutes = min < 10 ? `0${min}` : `${min}`;
@@ -42,6 +46,10 @@ const updateTime = () => {
         const seconds = sec < 10 ? `0${sec}` : `${sec}`;
         
         clockWatch.textContent =`${minutes}:${seconds}`
+        if(time === 0) {
+            console.log('object')
+            clearInterval(counterInterval);
+        }
     } else {
             counter = !counter;
             console.log('kurcze')
@@ -82,7 +90,7 @@ const updateSettings = () => {
     settingsPanel.classList.remove('active-modal');
     time = workSetting.value * 60;
     clockWatch.textContent = workSetting.value > 9 ? `${workSetting.value}:00` : `0${workSetting.value}:00`;
-    counter = !counter;
+    // counter = !counter;
     clearInterval(counterInterval);
 };
 
