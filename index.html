@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pomodoro App with timer, todoList and friendly user interface">
     <title>Your Pomodoro Timer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +16,7 @@
 
 <body>
 
-    <button class="btn-settings">
+    <button class="btn-settings" aria-label="Handle settings menu">
         <i class="fas fa-cogs"></i>
     </button>
 
@@ -61,7 +62,9 @@
 
 
     <div class="clock">
-        <div class="clock-circle"></div>
+        <div class="clock-circle">
+            <div id="slime"></div>
+        </div>
         <div class="clock-line">
             <div class="clock-timebox">
                 <p class="clock-time">10:00</p>
@@ -70,49 +73,22 @@
         </div>
     </div>
     <div class="clock-buttons">
-        <button class="btn btn-start"><i class="fas fa-play"></i></button>
-        <button class="btn btn-pause"><i class="fas fa-pause"></i></button>
+        <button class="btn btn-start" aria-label="Start timer"><i class="fas fa-play"></i></button>
+        <button class="btn btn-pause" aria-label="Pause timer"><i class="fas fa-pause"></i></button>
     </div>
 
     <div class="todo ">
-        <button class="btn-todo">
+        <button class="btn-todo" aria-label="Turn on todolist">
             <i class="fas fa-chevron-up"></i>
         </button>
 
         <ul class="todo-items">
-
-            <li class="todo-item">
-                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
-                <button class="btn btn-delete">⨯</button>
-            </li>
-            <li class="todo-item">
-                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
-                <button class="btn btn-delete">⨯</button>
-            </li>
-            <li class="todo-item">
-                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
-                <button class="btn btn-delete">⨯</button>
-            </li>
-            <li class="todo-item">
-                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
-                <button class="btn btn-delete">⨯</button>
-            </li>
-            <li class="todo-item">
-                <p class="todo-item-content">Lorem ipsum dolor sit amet </p>
-                <button class="btn btn-delete">⨯</button>
-            </li>
-            <li class="todo-item">
-                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
-                <button class="btn btn-delete">⨯</button>
-            </li>
-            <li class="todo-item">
-                <p class="todo-item-content">Lorem ipsum dolor sit amet</p>
-                <button class="btn btn-delete">⨯</button>
-            </li>
-
         </ul>
+
         <div class="todo-headerbox">
             <p class="todo-header">todo list</p>
+            <label for=""></label>
+            <input class="todo-input" type="text">
             <button class="btn btn-add">+</button>
         </div>
     </div>

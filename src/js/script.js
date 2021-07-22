@@ -1,13 +1,19 @@
 const clockWatch = document.querySelector('.clock-time');
 const clockCircle = document.querySelector('.clock-circle');
-const clockSlime = document.querySelector('.clock-circle-slime');
+// const clockSlime = document.querySelector('.clock-circle-slime');
+const clockSlime = document.querySelector('#slime');
+
+
 
 // AUDIO
 const ticking = document.querySelector('.ticking');
 
 // TODOLIST
 const todoBtn = document.querySelector('.btn-todo');
+const todoAdd = document.querySelector('.btn-add');
+const todoInput = document.querySelector('.todo-input');
 const todo = document.querySelector('.todo');
+const todoList = document.querySelector('.todo-items');
 
 
 // SETTINGS
@@ -39,6 +45,8 @@ const handleTodo = () => {
 let time = workSetting.value * 60;
 let counter = true;
 
+let workTime = 0;
+let breakTime = 0;
 
 const updateTime = () => {
     if(counter) {
@@ -50,40 +58,27 @@ const updateTime = () => {
         clockWatch.textContent =`${minutes}:${seconds}`
 
         if(time === 0) {
-            console.log('object')
             clearInterval(counterInterval);
         }
     } else {
             counter = !counter;
-            console.log('kurcze')
             time = workSetting.value * 60;
             return
     }
-    
-    // setTimeout(() => {
-    //     if(time > 0 && counter) {
-    //         time--;
-    //         updateTime()
-    //     }else {
-    //         clockWatch.textContent = '00:00';
-    //         counter = !counter;
-    //         clearTimeout();
-    //         updateTime()
-    //     }
-    // }, 100)
 };
 
 // CHANGING VOLUME
 const updateVolume = () => {
     ticking.volume = parseInt(volumeRange.value)/100;
-console.log(parseInt(volumeRange.value)/100)
-
 };
+
 // HANDLING EFFECTS
 const handleEffects = () => {
-    clockCircle.classList.add('clock-circle-slime')
-    ticking.play();
-}
+    playBtn.classList.add('active');
+    pauseBtn.classList.remove('active');
+    clockSlime.classList.add('clock-circle-slime')
+    clockSlime.style.animationDuration = `${time}s`;
+};
 
 
 // TIME COUNTER
@@ -100,38 +95,66 @@ const countTime = () => {
         if(counter) {
             time--;
             updateTime()
+            ticking.play();
+
         } else if(time == 0) {
             clockWatch.textContent = '00:00';
             counter = !counter;
-            console.log('kraksa')
             updateTime()
         }
     }, 1000)
 }
 
+// SETTINGS UPDATE
 const updateSettings = () => {
     settingsPanel.classList.remove('active-modal');
     time = workSetting.value * 60;
     clockWatch.textContent = workSetting.value > 9 ? `${workSetting.value}:00` : `0${workSetting.value}:00`;
-    // counter = !counter;
+    ticking.pause();
+    playBtn.classList.remove('active')
     clearInterval(counterInterval);
 };
 
+// PAUSING APP
 const pauseTime = () => {
+    if(clockWatch.textContent == '00:00') {
+        return
+    }
+    pauseBtn.classList.add('active');
+    playBtn.classList.remove('active');
     playBtn.removeAttribute('disabled');
     clearInterval(counterInterval)
     ticking.pause();
 
+}
 
-    if(clockWatch.textContent == '00:00') {
-        return
-    }
+let id = 0;
+
+// ADDING TODO ITEM
+const addItem = () => {
+    const item = document.createElement('li');
+    item.classList.add('todo-item');
+    item.setAttribute('id', id)
+    item.innerHTML = `
+    <p class="todo-item-content">${todoInput.value}</p>
+    <button class="btn btn-delete">⨯</button>`;
+    todoList.appendChild(item);
+    id++
+    todoInput.value = '';
 
 }
 
+// DELETING TODO ITEM
+const deleteItem = e => {
+    e.target.classList.contains('btn-delete') ?  e.target.closest('li').remove() : null;
+};
+
+
 settingsBtn.addEventListener('click', handleSettings);
-saveBtn.addEventListener('click',updateSettings);
+saveBtn.addEventListener('click', updateSettings);
 todoBtn.addEventListener('click', handleTodo);
 playBtn.addEventListener('click', countTime);
 pauseBtn.addEventListener('click', pauseTime);
-volumeRange.addEventListener('change', updateVolume) 
+volumeRange.addEventListener('change', updateVolume);
+todoAdd.addEventListener('click', addItem);
+todoList.addEventListener('click', deleteItem)
