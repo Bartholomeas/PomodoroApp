@@ -2,8 +2,14 @@ $base-color: #C25050;
 $base-shade-color: #973232;
 $font-color: #F0E7D9;
 $secondary-color: #181F33;
-$bg-color:#0C0C17;
-$todo-color: #27304b;
+// $bg-color:#0C0C17;
+// $todo-color: #27304b;
+
+:root {
+    --bg-color:#c56424;
+    --todo-color: #27304b;
+
+}
 
 * {
     margin: 0;
@@ -115,13 +121,14 @@ body {
 // SETTINGS
 .settings {
     position: absolute;
-    height: 30rem;
+    height: 35rem;
     width: 25rem;
     top: 8rem;
     right: 2rem;
     padding: 2rem;
     border-radius: 8px;
-    background-color: $secondary-color;
+    // background-color: $secondary-color;
+    background-color: var(--bg-color);
     transform: scaleY(0);
     transform-origin: top center;
     transition: transform .3s ease-in-out;
@@ -156,7 +163,7 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 100%;
+        height: 85%;
         list-style: none;
 
         li {
@@ -172,13 +179,15 @@ body {
             }
         }
 
-        .btn-save {
-            font-weight: bold;
-            font-size: 2rem;
-            transition: color .3s;
-            &:hover {
-                color:$base-color
-            }
+    }
+    .btn-save {
+        left: 50%;
+        font-weight: bold;
+        font-size: 1.8rem;
+        width: 100%;
+        transition: color .3s;
+        &:hover {
+            color:$base-color
         }
     }
 
@@ -246,7 +255,6 @@ body {
 
         &.active-todo {
             transform: translateY(0)
-
         }
 
     .fas {

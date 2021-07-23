@@ -3,8 +3,6 @@ const clockCircle = document.querySelector('.clock-circle');
 // const clockSlime = document.querySelector('.clock-circle-slime');
 const clockSlime = document.querySelector('#slime');
 
-
-
 // AUDIO
 const ticking = document.querySelector('.ticking');
 
@@ -85,14 +83,17 @@ const handleEffects = () => {
 let counterInterval;
 const countTime = () => {
     if(clockWatch.textContent == '00:00') {
+        ticking.pause();
+        clearInterval(counterInterval);
+        console.log('counter alert')
         return
     }
-    handleEffects()
+    handleEffects();
 
     playBtn.setAttribute('disabled', true);
 
     counterInterval = setInterval(() => {
-        if(counter) {
+        if(time != 0) {
             time--;
             updateTime()
             ticking.play();
@@ -100,9 +101,10 @@ const countTime = () => {
         } else if(time == 0) {
             clockWatch.textContent = '00:00';
             counter = !counter;
+            ticking.pause();
             updateTime()
         }
-    }, 1000)
+    }, 10)
 }
 
 // SETTINGS UPDATE
@@ -117,15 +119,15 @@ const updateSettings = () => {
 
 // PAUSING APP
 const pauseTime = () => {
-    if(clockWatch.textContent == '00:00') {
-        return
-    }
     pauseBtn.classList.add('active');
     playBtn.classList.remove('active');
     playBtn.removeAttribute('disabled');
     clearInterval(counterInterval)
     ticking.pause();
-
+    
+    if(clockWatch.textContent == '00:00') {
+        return
+    }
 }
 
 let id = 0;
