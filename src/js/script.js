@@ -55,9 +55,13 @@ const updateTime = () => {
         
         clockWatch.textContent =`${minutes}:${seconds}`
 
-        if(time === 0) {
+        if(time == 0) {
+            setTimeout(() => {
+                ticking.pause();
+            }, 1)
             clearInterval(counterInterval);
         }
+
     } else {
             counter = !counter;
             time = workSetting.value * 60;
@@ -78,15 +82,14 @@ const handleEffects = () => {
     clockSlime.style.animationDuration = `${time}s`;
 };
 
-
 // TIME COUNTER
 let counterInterval;
 const countTime = () => {
+
     if(clockWatch.textContent == '00:00') {
         ticking.pause();
-        clearInterval(counterInterval);
         console.log('counter alert')
-        return
+        clearInterval(counterInterval);
     }
     handleEffects();
 
@@ -97,14 +100,16 @@ const countTime = () => {
             time--;
             updateTime()
             ticking.play();
-
+            
         } else if(time == 0) {
             clockWatch.textContent = '00:00';
+            console.log('interwal');
             counter = !counter;
+            clearInterval(counterInterval);
             ticking.pause();
-            updateTime()
+            updateTime();
         }
-    }, 10)
+    }, 1000)
 }
 
 // SETTINGS UPDATE
@@ -119,15 +124,15 @@ const updateSettings = () => {
 
 // PAUSING APP
 const pauseTime = () => {
-    pauseBtn.classList.add('active');
-    playBtn.classList.remove('active');
-    playBtn.removeAttribute('disabled');
-    clearInterval(counterInterval)
-    ticking.pause();
-    
     if(clockWatch.textContent == '00:00') {
         return
     }
+    pauseBtn.classList.add('active');
+    playBtn.classList.remove('active');
+    playBtn.removeAttribute('disabled');
+    clearInterval(counterInterval);
+    ticking.pause();
+    
 }
 
 let id = 0;
@@ -141,7 +146,7 @@ const addItem = () => {
     <p class="todo-item-content">${todoInput.value}</p>
     <button class="btn btn-delete">⨯</button>`;
     todoList.appendChild(item);
-    id++
+    id++;
     todoInput.value = '';
 
 }
@@ -151,7 +156,6 @@ const deleteItem = e => {
     e.target.classList.contains('btn-delete') ?  e.target.closest('li').remove() : null;
 };
 
-
 settingsBtn.addEventListener('click', handleSettings);
 saveBtn.addEventListener('click', updateSettings);
 todoBtn.addEventListener('click', handleTodo);
@@ -159,4 +163,4 @@ playBtn.addEventListener('click', countTime);
 pauseBtn.addEventListener('click', pauseTime);
 volumeRange.addEventListener('change', updateVolume);
 todoAdd.addEventListener('click', addItem);
-todoList.addEventListener('click', deleteItem)
+todoList.addEventListener('click', deleteItem);
